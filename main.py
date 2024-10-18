@@ -32,6 +32,25 @@ vector_store_loaded = Milvus(
     collection_name="langchain_example",
 )
 
+from ibm_watsonx_ai.metanames import GenTextParamsMetaNames
+parameters = {
+    GenTextParamsMetaNames.DECODING_METHOD: "sample",
+    GenTextParamsMetaNames.MAX_NEW_TOKENS: 100,
+    GenTextParamsMetaNames.MIN_NEW_TOKENS: 1,
+    GenTextParamsMetaNames.TEMPERATURE: 0.5,
+    GenTextParamsMetaNames.TOP_K: 50,
+    GenTextParamsMetaNames.TOP_P: 1,
+}
+
+from langchain_ibm import ChatWatsonx
+watsonx_llm = ChatWatsonx(
+    model_id="meta-llama/llama-3-70b-instruct",
+    url="https://us-south.ml.cloud.ibm.com",
+    apikey="*****",
+    project_id="*****",
+    params=parameters,
+)
+
 
 
 
